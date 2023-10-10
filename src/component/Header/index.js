@@ -6,7 +6,7 @@ import { useAuthValue } from '~/authContext';
 
 function Header() {
 
-  const currentUser = false
+  const currentUser = true;
 
   const userMenu = [
     {

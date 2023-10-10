@@ -19,6 +19,13 @@ const publicRoutes = [
   {path: '/register', component: Register},
 ]
 
-const privateRoutes = []
+const privateRoutes = [
+  {path: '/', component: Home},
+  {path: '/home', component: Home},
+  {path: '/detail', component: Detail},
+  {path: '/movies', component: Movies},
+  {path: '/people', component: People},
+  {path: '/tvshow', component: TvShow},
+]
 
 export { publicRoutes, privateRoutes }

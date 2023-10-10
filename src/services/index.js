@@ -221,7 +221,7 @@ export const dataPopulars = [
   },
 ];
 
-const getDataUsers = async () => {
+export const getDataUsers = async () => {
   const response = await axios.get("https://652405ebea560a22a4e945b0.mockapi.io/user/users")
 
   const result = response.status === 200 ? response.data : {}
@@ -244,6 +244,6 @@ export const checkLoginUsers = async (username, password) => {
     // }
     return user.username === username && user.password === password;
   })
-console.log(result);
+  console.log(result);
   return result;
 }
