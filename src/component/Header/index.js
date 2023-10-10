@@ -2,10 +2,11 @@
 import { Link } from 'react-router-dom';
 import logo from '~/images/logo.svg';
 import avatar from '~/images/avatar.jpg'
+import { useAuthValue } from '~/authContext';
 
 function Header() {
 
-  const currentUser = true
+  const currentUser = false
 
   const userMenu = [
     {
