@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import {Link, Navigate, useNavigate} from 'react-router-dom';
 import logo from '~/images/logo.svg';
 import avatar from '~/images/avatar.jpg'
 import { useAuthValue } from '~/authContext';
@@ -7,6 +7,13 @@ import { useAuthValue } from '~/authContext';
 function Header() {
 
   const currentUser = true;
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    console.log('logout');
+    localStorage.removeItem('user');
+    navigate('/login');
+  }
 
   const userMenu = [
     {
@@ -181,6 +188,7 @@ function Header() {
                     {
                       currentUser ? (
                         <img
+                          onClick={handleLogout}
                           src={avatar}
                           className="w-[32px] h-[32px] rounded-full cursor-pointer"
                           alt='Nguyen Van A'

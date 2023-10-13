@@ -7,25 +7,16 @@ import TvShow from '~/pages/TvShow';
 import Login from '~/pages/Login';
 import Register from '~/pages/Register';
 
-const publicRoutes = [
+const routes = [
   // {path: '/', component: Detail},
-  {path: '/', component: Home},
-  {path: '/home', component: Home},
-  {path: '/detail', component: Detail},
-  {path: '/movies', component: Movies},
-  {path: '/people', component: People},
-  {path: '/tvshow', component: TvShow},
-  {path: '/login', component: Login},
-  {path: '/register', component: Register},
+  {path: '/login', component: Login, privateRoute: false},
+  {path: '/register', component: Register, privateRoute: false},
+  {path: '/', component: Home, privateRoute: true},
+  {path: '/home', component: Home, privateRoute: true},
+  {path: '/detail', component: Detail, privateRoute: true},
+  {path: '/movies', component: Movies, privateRoute: true},
+  {path: '/people', component: People, privateRoute: true},
+  {path: '/tvshow', component: TvShow, privateRoute: true},
 ]
 
-const privateRoutes = [
-  {path: '/', component: Home},
-  {path: '/home', component: Home},
-  {path: '/detail', component: Detail},
-  {path: '/movies', component: Movies},
-  {path: '/people', component: People},
-  {path: '/tvshow', component: TvShow},
-]
-
-export { publicRoutes, privateRoutes }
+export { routes }

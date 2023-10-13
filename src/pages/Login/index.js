@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { checkLoginUsers } from '~/services/index'
@@ -11,6 +11,13 @@ function Login() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user?.id) {
+      navigate('/home');
+    }
+  }, []);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -32,6 +39,8 @@ function Login() {
     console.log(userAuth);
 
     if (userAuth) {
+      localStorage.setItem("user", JSON.stringify(userAuth));
+      console.log(userAuth);
       console.log("Dang nhap thanh cong");
 
       setIsLoggedIn(true);
