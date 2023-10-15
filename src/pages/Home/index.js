@@ -6,6 +6,7 @@ import Trailers from "~/component/Trailers";
 import Trending from "~/component/Trending";
 
 function Home() {
+  console.log("Home");
   return (
     <div>
       <Banner />

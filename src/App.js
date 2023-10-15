@@ -1,52 +1,119 @@
-import {BrowserRouter as Router, Navigate, Route, Routes} from "react-router-dom";
-import {Fragment, useEffect, useState} from "react";
-import {routes} from "~/routes";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import { Fragment, useEffect, useState } from "react";
+import { routes } from "~/routes";
 import "./App.css";
-import {DefaultLayout} from "~/layout";
-import {AuthProvider, useAuthValue} from "~/authContext";
+import { DefaultLayout as Layout } from "~/layout";
+import { AuthProvider, useAuthValue } from "~/authContext";
+import Home from "~/pages/Home";
+import Detail from "~/pages/Detail";
+import Movies from "~/pages/Movies";
+import People from "~/pages/People";
+import TvShow from "~/pages/TvShow";
+import Login from "~/pages/Login";
+import Register from "~/pages/Register";
+// }
 
-function PrivateRoute({children, ...rest}) {
+const PrivateRoute = ({ path, children, element: Element }) => {
   const currentUser = useAuthValue();
-
-  return (currentUser?.id ? (children) : (<Navigate to="/login" replace state={{from: rest.location}}/>));
-}
-
-function PublicRoute({children, ...rest}) {
-  const currentUser = useAuthValue();
-
-  return (currentUser?.id ? (children) : (<Navigate to="/login" replace state={{from: rest.location}}/>));
-}
+  return currentUser?.id ? <Element /> : <Navigate to="/login" replace />;
+};
 
 function App() {
+  const currentUser = useAuthValue();
   const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(currentUser);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem("user"));
     setUser(user);
-  }, [])
+    return () => {}
+  }, []);
 
-  return (<Router>
-      <div className="app">
-        <AuthProvider value={user}>
+  return (
+    <Router>
+      <AuthProvider value={user}>
+        <Layout>
           <Routes>
-            {routes.map((route, index) => {
-              const Layout = route.layout === null ? Fragment : DefaultLayout;
-              const Page = route.component;
-              const PrivateRoutes = route.privateRoute ? PrivateRoute : PublicRoute;
-              return (<Route
-                  key={index}
-                  path={route.path}
-                  element={<Layout>
-                    <PrivateRoutes>
-                      <Page/>
-                    </PrivateRoutes>
-                  </Layout>}
-                />);
-            })}
+            <Route
+              path="/"
+              element={
+                <PrivateRoute
+                  element={Home}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+            <Route
+              path="/home"
+              element={
+                <PrivateRoute
+                  element={Home}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+            <Route
+              path="/detail"
+              element={
+                <PrivateRoute
+                  element={Detail}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+            <Route
+              path="/movies"
+              element={
+                <PrivateRoute
+                  element={Movies}
+                  isAuthenticated={isAuthenticated}
+                />
+              }
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/register"
+              element={<Register />}
+            />
           </Routes>
-        </AuthProvider>
-      </div>
-    </Router>);
+        </Layout>
+      </AuthProvider>
+    </Router>
+  );
+
+  // return (
+  //   <Router>
+  //     <div className="app">
+  //       <AuthProvider value={user}>
+  //         <Layout>
+  //           <Routes>
+  //             {routes.map((route, index) => {
+  //               const Page = route.component;
+  //               const PrivateRoutes = route.privateRoute
+  //                 ? PrivateRoute
+  //                 : PublicRoute;
+  //               return (
+  //                 <PrivateRoutes
+  //                   key={index}
+  //                   path={route.path}
+  //                   component={Page}
+  //                 ></PrivateRoutes>
+  //               );
+  //             })}
+  //           </Routes>
+  //         </Layout>
+  //       </AuthProvider>
+  //     </div>
+  //   </Router>
+  // );
 }
 
 export default App;

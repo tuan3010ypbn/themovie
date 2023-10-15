@@ -1,56 +1,63 @@
-
-import {Link, Navigate, useNavigate} from 'react-router-dom';
-import logo from '~/images/logo.svg';
-import avatar from '~/images/avatar.jpg'
-import { useAuthValue } from '~/authContext';
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import logo from "~/images/logo.svg";
+import avatar from "~/images/avatar.jpg";
+import { useAuthValue } from "~/authContext";
+import { useEffect, useState } from "react";
 
 function Header() {
-
-  const currentUser = true;
+  
+  const currentUser= useAuthValue();
+  console.log('currentUser', currentUser);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    console.log('logout');
-    localStorage.removeItem('user');
-    navigate('/login');
-  }
+    console.log("logout");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    // const currentUser = localStorage.getItem("user");
+    // setUser(currentUser);
+    return () => {}
+  }, [])
 
   const userMenu = [
     {
-      title: 'View profile',
-      to: '/@tuan2003'
+      title: "View profile",
+      to: "/@tuan2003",
     },
     {
-      title: 'Discussions',
-      to: '/discussions'
+      title: "Discussions",
+      to: "/discussions",
     },
     {
-      title: 'Lists',
-      to: '/list'
+      title: "Lists",
+      to: "/list",
     },
     {
-      title: 'Ratings',
-      to: '/rating'
+      title: "Ratings",
+      to: "/rating",
     },
     {
-      title: 'Watchlist',
-      to: '/watchlist'
+      title: "Watchlist",
+      to: "/watchlist",
     },
     {
-      title: 'Edit Profile',
-      to: '/setting/profile'
+      title: "Edit Profile",
+      to: "/setting/profile",
     },
     {
-      title: 'Settings',
-      to: '/setting'
+      title: "Settings",
+      to: "/setting",
     },
     {
-      title: 'Logout',
-      to: '/logout',
+      title: "Logout",
+      to: "/logout",
       separate: true,
     },
-
-  ]
+  ];
 
   // console.log(userMenu);
 
@@ -110,13 +117,22 @@ function Header() {
                       >
                         Popular
                       </Link>
-                      <Link className="text-black text-base font-normal mb-2" to={"#"}>
+                      <Link
+                        className="text-black text-base font-normal mb-2"
+                        to={"#"}
+                      >
                         Airing Today
                       </Link>
-                      <Link className="text-black text-base font-normal mb-2" to={"#"}>
+                      <Link
+                        className="text-black text-base font-normal mb-2"
+                        to={"#"}
+                      >
                         On TV
                       </Link>
-                      <Link className="text-black text-base font-normal mb-2" to={"#"}>
+                      <Link
+                        className="text-black text-base font-normal mb-2"
+                        to={"#"}
+                      >
                         Top Rated
                       </Link>
                     </div>
@@ -185,23 +201,43 @@ function Header() {
                   </li>
 
                   <li>
-                    {
-                      currentUser ? (
+                    {currentUser?.id ? (
+                      <div className="nav-list-container--item group relative">
                         <img
                           onClick={handleLogout}
                           src={avatar}
-                          className="w-[32px] h-[32px] rounded-full cursor-pointer"
-                          alt='Nguyen Van A'
+                          className="group relative w-[32px] h-[32px] rounded-full cursor-pointer flex"
+                          alt="Nguyen Van A"
                         />
-                      ) : (
-                        <Link style={{display: 'inline-block'}} to={"/login"}>Login</Link>
-                      )
-                    }
+                        <div className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[40px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
+                          <ul className="">
+                            <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                              <button className="">View profile</button>
+                            </li>
+                            <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                              <button onClick={handleLogout} className="">Logout</button>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    ) : (
+                      <Link style={{ display: "inline-block" }} to={"/login"}>
+                        Login
+                      </Link>
+                    )}
+                    <ul className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[60px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
+                      <li className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                        <button className="">View profile</button>
+                      </li>
+                      <li className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                        <button className="">Logout</button>
+                      </li>
+                    </ul>
                   </li>
 
-                  <li>
+                  {/* <li>
                     <Link to={"/"}>Join TMDB</Link>
-                  </li>
+                  </li> */}
 
                   <li>
                     <Link to={"/"}>
@@ -215,7 +251,7 @@ function Header() {
             </div>
           </nav>
           {/* <!-- ======= Mobile ==== --> */}
-          {/* <div className="bg-blue-900 lg:hidden text-white flex items-center px-5 py-[10px] justify-between">
+          <div className="bg-blue-900 lg:hidden text-white flex items-center px-5 py-[10px] justify-between">
             <span className="mobile-header--icon menu">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -254,7 +290,7 @@ function Header() {
                 className="mobile-header--icon search w-6 h-6"
               />
             </div>
-          </div> */}
+          </div>
         </div>
       </header>
     </>
