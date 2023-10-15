@@ -17,6 +17,8 @@ function Login() {
     if (user?.id) {
       navigate('/home');
     }
+
+    return () => {}
   }, []);
 
   const handleUsernameChange = (e) => {
@@ -54,8 +56,13 @@ function Login() {
 
     // Xử lý logic đăng nhập ở đây, ví dụ kiểm tra và xác thực thông tin đăng nhập
     // console.log("Đăng nhập thành công!");
+    
     // console.log(username, password);
   };
+  
+  useEffect(() => {
+    return () => {}
+  }, [])
 
   return (
     <>

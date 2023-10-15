@@ -1,65 +1,30 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "~/images/logo.svg";
 import avatar from "~/images/avatar.jpg";
 import { useAuthValue } from "~/authContext";
 import { useEffect, useState } from "react";
 
 function Header() {
-  
-  const currentUser= useAuthValue();
-  console.log('currentUser', currentUser);
+  const currentUser = useAuthValue();
+  console.log("currentUser", currentUser);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
+  console.log("currentID: ", currentUser?.id);
+
   const handleLogout = () => {
     console.log("logout");
+    
     localStorage.removeItem("user");
+
     navigate("/login");
   };
 
   useEffect(() => {
     // const currentUser = localStorage.getItem("user");
     // setUser(currentUser);
-    return () => {}
-  }, [])
-
-  const userMenu = [
-    {
-      title: "View profile",
-      to: "/@tuan2003",
-    },
-    {
-      title: "Discussions",
-      to: "/discussions",
-    },
-    {
-      title: "Lists",
-      to: "/list",
-    },
-    {
-      title: "Ratings",
-      to: "/rating",
-    },
-    {
-      title: "Watchlist",
-      to: "/watchlist",
-    },
-    {
-      title: "Edit Profile",
-      to: "/setting/profile",
-    },
-    {
-      title: "Settings",
-      to: "/setting",
-    },
-    {
-      title: "Logout",
-      to: "/logout",
-      separate: true,
-    },
-  ];
-
-  // console.log(userMenu);
+    return () => {};
+  }, []);
 
   return (
     <>
@@ -204,7 +169,6 @@ function Header() {
                     {currentUser?.id ? (
                       <div className="nav-list-container--item group relative">
                         <img
-                          onClick={handleLogout}
                           src={avatar}
                           className="group relative w-[32px] h-[32px] rounded-full cursor-pointer flex"
                           alt="Nguyen Van A"
@@ -212,10 +176,12 @@ function Header() {
                         <div className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[40px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
                           <ul className="">
                             <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
-                              <button className="">View profile</button>
+                              <button>View profile</button>
                             </li>
                             <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
-                              <button onClick={handleLogout} className="">Logout</button>
+                              <button onClick={handleLogout}>
+                                Log out
+                              </button>
                             </li>
                           </ul>
                         </div>
@@ -225,6 +191,7 @@ function Header() {
                         Login
                       </Link>
                     )}
+
                     <ul className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[60px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
                       <li className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
                         <button className="">View profile</button>
@@ -233,6 +200,7 @@ function Header() {
                         <button className="">Logout</button>
                       </li>
                     </ul>
+
                   </li>
 
                   {/* <li>

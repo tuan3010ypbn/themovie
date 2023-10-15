@@ -4,16 +4,16 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { Fragment, useEffect, useState } from "react";
-import { routes } from "~/routes";
+import { useEffect, useState } from "react";
+// import { routes } from "~/routes";
 import "./App.css";
 import { DefaultLayout as Layout } from "~/layout";
 import { AuthProvider, useAuthValue } from "~/authContext";
 import Home from "~/pages/Home";
 import Detail from "~/pages/Detail";
 import Movies from "~/pages/Movies";
-import People from "~/pages/People";
-import TvShow from "~/pages/TvShow";
+// import People from "~/pages/People";
+// import TvShow from "~/pages/TvShow";
 import Login from "~/pages/Login";
 import Register from "~/pages/Register";
 // }
@@ -31,6 +31,7 @@ function App() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     setUser(user);
+
     return () => {}
   }, []);
 
@@ -75,14 +76,8 @@ function App() {
                 />
               }
             />
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-            <Route
-              path="/register"
-              element={<Register />}
-            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </Layout>
       </AuthProvider>
