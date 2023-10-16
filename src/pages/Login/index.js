@@ -13,12 +13,15 @@ function Login() {
   const navigate = useNavigate()
 
   useEffect(() => {
+    
     const user = JSON.parse(localStorage.getItem("user"));
+
     if (user?.id) {
       navigate('/home');
     }
 
     return () => {}
+
   }, []);
 
   const handleUsernameChange = (e) => {

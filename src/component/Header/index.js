@@ -6,25 +6,32 @@ import { useEffect, useState } from "react";
 
 function Header() {
   const currentUser = useAuthValue();
-  console.log("currentUser", currentUser);
-  const [user, setUser] = useState(null);
+
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || []
+  );
+
+  console.log("user: ", user);
+
   const navigate = useNavigate();
 
-  console.log("currentID: ", currentUser?.id);
-
   const handleLogout = () => {
-    console.log("logout");
     
     localStorage.removeItem("user");
 
     navigate("/login");
+
+    window.localStorage.clear();
+
+    console.log("logout");
   };
 
   useEffect(() => {
     // const currentUser = localStorage.getItem("user");
     // setUser(currentUser);
+
     return () => {};
-  }, []);
+  }, [user]);
 
   return (
     <>
@@ -179,9 +186,7 @@ function Header() {
                               <button>View profile</button>
                             </li>
                             <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
-                              <button onClick={handleLogout}>
-                                Log out
-                              </button>
+                              <button onClick={handleLogout}>Log out</button>
                             </li>
                           </ul>
                         </div>
@@ -200,7 +205,6 @@ function Header() {
                         <button className="">Logout</button>
                       </li>
                     </ul>
-
                   </li>
 
                   {/* <li>

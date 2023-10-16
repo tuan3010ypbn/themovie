@@ -19,7 +19,9 @@ import Register from "~/pages/Register";
 // }
 
 const PrivateRoute = ({ path, children, element: Element }) => {
+  
   const currentUser = useAuthValue();
+
   return currentUser?.id ? <Element /> : <Navigate to="/login" replace />;
 };
 
