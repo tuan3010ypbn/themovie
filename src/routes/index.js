@@ -1,4 +1,12 @@
-import {lazy} from "react";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import {Suspense, useState, lazy} from "react";
+import {DefaultLayout as Layout} from "~/layout";
+import {AuthProvider} from "~/authContext";
 
 const Home = lazy(() => import('~/pages/Home'))
 const Detail = lazy(() => import('~/pages/Detail'))
@@ -8,16 +16,65 @@ const TvShow = lazy(() => import('~/pages/TvShow'))
 const Login = lazy(() => import('~/pages/Login'))
 const Register = lazy(() => import('~/pages/Register'))
 
-const routes = [
-  // {path: '/', component: Detail},
-  {path: '/login', component: Login, privateRoute: false},
-  {path: '/register', component: Register, privateRoute: false},
-  {path: '/', component: Home, privateRoute: true},
-  {path: '/home', component: Home, privateRoute: true},
-  {path: '/detail', component: Detail, privateRoute: true},
-  {path: '/movies', component: Movies, privateRoute: true},
-  {path: '/people', component: People, privateRoute: true},
-  {path: '/tvshow', component: TvShow, privateRoute: true},
-]
+const PublicRoute = ({children}) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  if (currentUser) {
+    return <Navigate to="/" replace/>;
+  }
+  return children;
+};
 
-export { routes }
+const PrivateRoute = ({children}) => {
+  const currentUser = JSON.parse(localStorage.getItem("user"));
+  if (!currentUser) {
+    return <Navigate to="/login" replace/>;
+  }
+  return children;
+}
+
+function RoutesApp() {
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
+
+  return (
+    <Router>
+      <AuthProvider value={user}>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Layout>
+            <Routes>
+              <Route
+                path="/"
+                element={<PrivateRoute><Home/></PrivateRoute>}
+              />
+              <Route
+                path="/home"
+                element={<PrivateRoute><Home/></PrivateRoute>}
+              />
+              <Route
+                path="/detail"
+                element={<PrivateRoute><Detail/></PrivateRoute>}
+              />
+              <Route
+                path="/movies"
+                element={<PrivateRoute><Movies/></PrivateRoute>}
+              />
+              <Route
+                path="/login"
+                element={
+                  <PublicRoute><Login/></PublicRoute>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <PublicRoute><Register/></PublicRoute>
+                }
+              />
+            </Routes>
+          </Layout>
+        </Suspense>
+      </AuthProvider>
+    </Router>
+  );
+}
+
+export default RoutesApp;

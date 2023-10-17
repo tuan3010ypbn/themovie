@@ -1,4 +1,3 @@
-
 import axios from "axios";
 
 export const dataTrending = [
@@ -32,7 +31,7 @@ export const dataTrending = [
   {
     id: 4,
     name: "Castlevania: Dạ Khúc",
-    image:"https://www.themoviedb.org/t/p/w220_and_h330_face/tslJx5LPn2aXX3USGYbh0KbglnB.jpg",
+    image: "https://www.themoviedb.org/t/p/w220_and_h330_face/tslJx5LPn2aXX3USGYbh0KbglnB.jpg",
     alt: "",
     percent: "98",
     time: "Aug 16, 2023",
@@ -142,7 +141,7 @@ export const dataPopulars = [
   {
     id: 4,
     name: "Pyar Ka Pehla Naam: Radha Mohan",
-    image:"https://www.themoviedb.org/t/p/w220_and_h330_face/cGUF4aT3GCmCy3f84KKIpWS3kty.jpg",
+    image: "https://www.themoviedb.org/t/p/w220_and_h330_face/cGUF4aT3GCmCy3f84KKIpWS3kty.jpg",
     alt: "",
     percent: "98",
     time: "Aug 16, 2023",

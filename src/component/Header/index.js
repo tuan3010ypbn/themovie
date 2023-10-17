@@ -1,27 +1,19 @@
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import logo from "~/images/logo.svg";
 import avatar from "~/images/avatar.jpg";
-import { useAuthValue } from "~/authContext";
-import { useEffect, useState } from "react";
+import {useAuthValue} from "~/authContext";
+import {useEffect, useState} from "react";
 
 function Header() {
-  const currentUser = useAuthValue();
-
-  const [user, setUser] = useState(
-    JSON.parse(localStorage.getItem("user")) || []
-  );
-
-  console.log("user: ", user);
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    
+
     localStorage.removeItem("user");
 
     navigate("/login");
-
-    window.localStorage.clear();
 
     console.log("logout");
   };
@@ -36,15 +28,17 @@ function Header() {
                 to={"/"}
                 className="apply text-[2.1rem] pl-0 pr-[15px] py-0"
               >
-                <img src={logo} alt="logo" width="154" height="20" />
+                <img src={logo} alt="logo" width="154" height="20"/>
               </Link>
 
               <div className="flex items-center justify-between w-full">
                 <ul className="flex items-center gap-6">
                   <li className="nav-list-container--item group relative">
                     <Link to={"/movies"}>Movies</Link>
-                    <div className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
-                    <div className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
+                    <div
+                      className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
+                    <div
+                      className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
                       <Link
                         className="text-black text-base font-normal mb-2"
                         to={"/movies"}
@@ -74,8 +68,10 @@ function Header() {
 
                   <li className="nav-list-container--item group relative">
                     <Link to={"/tvshow"}>TV Shows</Link>
-                    <div className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
-                    <div className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
+                    <div
+                      className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
+                    <div
+                      className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
                       <Link
                         className="text-black text-base font-normal mb-2"
                         to={"/tvshow"}
@@ -105,8 +101,10 @@ function Header() {
 
                   <li className="nav-list-container--item group relative">
                     <Link to={"/people"}>People</Link>
-                    <div className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
-                    <div className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
+                    <div
+                      className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
+                    <div
+                      className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
                       <Link
                         className="text-black text-base font-normal mb-2"
                         to={"/people"}
@@ -118,8 +116,10 @@ function Header() {
 
                   <li className="nav-list-container--item group relative">
                     <Link to={"#"}>More</Link>
-                    <div className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
-                    <div className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
+                    <div
+                      className="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"></div>
+                    <div
+                      className="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex">
                       <Link
                         className="text-black text-base font-normal mb-2"
                         to={"#"}
@@ -152,14 +152,15 @@ function Header() {
                   <li>
                     <Link to={"/"}>
                       <i className="w-5 block">
-                        <img src="~/images/plus.svg" alt="" />
+                        <img src="~/images/plus.svg" alt=""/>
                       </i>
                     </Link>
                   </li>
 
                   <li>
                     <Link to={"/"}>
-                      <div className="w-7 h-[26px] flex justify-center items-center content-center border text-[0.7rem] px-[5px] py-[3px] rounded-[3px] border-solid border-white">
+                      <div
+                        className="w-7 h-[26px] flex justify-center items-center content-center border text-[0.7rem] px-[5px] py-[3px] rounded-[3px] border-solid border-white">
                         EN
                       </div>
                     </Link>
@@ -173,28 +174,34 @@ function Header() {
                           className="group relative w-[32px] h-[32px] rounded-full cursor-pointer flex"
                           alt="Nguyen Van A"
                         />
-                        <div className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[40px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
+                        <div
+                          className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[40px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
                           <ul className="">
-                            <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                            <li
+                              className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
                               <button>View profile</button>
                             </li>
-                            <li onClick={handleLogout} className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                            <li onClick={handleLogout}
+                                className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
                               <button>Log out</button>
                             </li>
                           </ul>
                         </div>
                       </div>
                     ) : (
-                      <Link style={{ display: "inline-block" }} to={"/login"}>
+                      <Link style={{display: "inline-block"}} to={"/login"}>
                         Login
                       </Link>
                     )}
 
-                    <ul className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[60px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
-                      <li className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                    <ul
+                      className="absolute menu-list hidden group-hover:flex bg-current w-[178px] h-[70px] top-[60px] before:absolute before:content-[''] before:w-[44px] before:h-[14px] before:bg-transparent before:top-[-14px]">
+                      <li
+                        className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
                         <button className="">View profile</button>
                       </li>
-                      <li className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                      <li
+                        className="menu-item text-black h-[32px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
                         <button className="">Logout</button>
                       </li>
                     </ul>
@@ -207,7 +214,7 @@ function Header() {
                   <li>
                     <Link to={"/"}>
                       <i className="block w-[30px]">
-                        <img src="~/images/search.svg" alt="" />
+                        <img src="~/images/search.svg" alt=""/>
                       </i>
                     </Link>
                   </li>
@@ -232,7 +239,7 @@ function Header() {
               </svg>
             </span>
             <Link to={"/"} className="mobile-header--logo">
-              <img src="~/images/logoFooter.svg" alt="" className="w-14" />
+              <img src="~/images/logoFooter.svg" alt="" className="w-14"/>
             </Link>
             <div className="mobile-header--right flex gap-2 items-center">
               <span className="mobile-header--icon user">

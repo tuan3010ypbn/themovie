@@ -1,28 +1,14 @@
-import React, {useEffect, useState} from "react";
-import { Link, useNavigate } from "react-router-dom";
-
-import { checkLoginUsers } from '~/services/index'
+import React, {useState} from "react";
+import {Link, useNavigate} from "react-router-dom";
+import {checkLoginUsers} from '~/services'
 
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const navigate = useNavigate()
-
-  useEffect(() => {
-    
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user?.id) {
-      navigate('/home');
-    }
-
-    return () => {}
-
-  }, []);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -45,27 +31,14 @@ function Login() {
 
     if (userAuth) {
       localStorage.setItem("user", JSON.stringify(userAuth));
-      console.log(userAuth);
       console.log("Dang nhap thanh cong");
-
-      setIsLoggedIn(true);
-
       navigate("/home")
 
     } else {
       alert('Dang nhap that bai')
       console.log("Dang nhap that bai");
     }
-
-    // Xử lý logic đăng nhập ở đây, ví dụ kiểm tra và xác thực thông tin đăng nhập
-    // console.log("Đăng nhập thành công!");
-    
-    // console.log(username, password);
   };
-  
-  useEffect(() => {
-    return () => {}
-  }, [])
 
   return (
     <>
