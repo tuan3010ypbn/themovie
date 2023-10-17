@@ -22,6 +22,7 @@ function Header() {
     navigate("/login");
 
     window.localStorage.clear();
+    console.log('storage: ',window.localStorage);
 
     console.log("logout");
   };
