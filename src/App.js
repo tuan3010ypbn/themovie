@@ -4,7 +4,7 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {Suspense, useEffect, useState} from "react";
 // import { routes } from "~/routes";
 import "./App.css";
 import { DefaultLayout as Layout } from "~/layout";
@@ -40,7 +40,8 @@ function App() {
   return (
     <Router>
       <AuthProvider value={user}>
-        <Layout>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Layout>
           <Routes>
             <Route
               path="/"
@@ -82,6 +83,7 @@ function App() {
             <Route path="/register" element={<Register />} />
           </Routes>
         </Layout>
+        </Suspense>
       </AuthProvider>
     </Router>
   );

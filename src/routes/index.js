@@ -1,11 +1,12 @@
+import {lazy} from "react";
 
-import Home from '~/pages/Home';
-import Detail from '~/pages/Detail';
-import Movies from '~/pages/Movies';
-import People from '~/pages/People';
-import TvShow from '~/pages/TvShow';
-import Login from '~/pages/Login';
-import Register from '~/pages/Register';
+const Home = lazy(() => import('~/pages/Home'))
+const Detail = lazy(() => import('~/pages/Detail'))
+const Movies = lazy(() => import('~/pages/Movies'))
+const People = lazy(() => import('~/pages/People'))
+const TvShow = lazy(() => import('~/pages/TvShow'))
+const Login = lazy(() => import('~/pages/Login'))
+const Register = lazy(() => import('~/pages/Register'))
 
 const routes = [
   // {path: '/', component: Detail},

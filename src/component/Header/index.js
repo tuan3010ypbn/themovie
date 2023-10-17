@@ -26,13 +26,6 @@ function Header() {
     console.log("logout");
   };
 
-  useEffect(() => {
-    // const currentUser = localStorage.getItem("user");
-    // setUser(currentUser);
-
-    return () => {};
-  }, [user]);
-
   return (
     <>
       <header>
@@ -185,8 +178,8 @@ function Header() {
                             <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
                               <button>View profile</button>
                             </li>
-                            <li className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
-                              <button onClick={handleLogout}>Log out</button>
+                            <li onClick={handleLogout} className="menu-item text-black h-[32px] w-[178px] flex items-center justify-center cursor-pointer hover:bg-slate-200">
+                              <button>Log out</button>
                             </li>
                           </ul>
                         </div>
