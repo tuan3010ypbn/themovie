@@ -10,11 +10,8 @@ function Header() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-
     localStorage.removeItem("user");
-
     navigate("/login");
-
     console.log("logout");
   };
 
