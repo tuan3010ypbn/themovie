@@ -1,8 +1,45 @@
-import { Link } from "react-router-dom";
-
-import { dataPopulars } from "~/services";
+import {useEffect, useState} from "react";
+import {Loading} from "~/component/Loading/Loading";
+import {CardMovie} from "~/component/CardMovie";
 
 function Populars() {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('https://6531ee474d4c2e3f333d67ff.mockapi.io/movies');
+        const jsonData = await response.json();
+        setData(jsonData[1]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const PopularsList = ({data}) => {
+    if (!data) {
+      return (
+        <div className="h-[299px] w-[100%] flex justify-center items-center">
+          <Loading/>
+        </div>
+      )
+    }
+
+    return (
+      <>
+        {data.results.map((item) => {
+          return (
+            <>
+              <CardMovie dataItem={item}/>
+            </>
+          )
+        })}
+      </>
+    )
+  }
   return (
     <>
       <div className="max-w-[1300px] m-auto">
@@ -24,37 +61,7 @@ function Populars() {
             </div>
           </div>
           <div className="px-5 md:px-0 overflow-x-auto flex gap-5 max-w-[1300px] mx-auto px-10 py-10 bg-cover bg-center bg-no-repeat bg-[url('./images/bg-movie.svg')]">
-            {dataPopulars.map((dataItem, index) => {
-              return (
-                <Link
-                  key={index}
-                  to={"/detail"}
-                  className="min-w-[150px] group relative hover:shadow-lg transition-transform transform hover:translate-y-[-4px]"
-                >
-                  <div className="product-item--img relative">
-                  <img
-                    src={dataItem.image}
-                    alt={dataItem.alt}
-                    className="rounded-lg"
-                  />
-                  <div className="percent absolute -bottom-4 left-[11px] flex justify-center items-center w-[38px] h-[38px] bg-black rounded-full group-hover:flex">
-                    <span className="percent-title text-white text-sm font-semibold">
-                      {dataItem.percent}<sup>%</sup>
-                    </span>
-                    <div className="border-[3px] absolute inset-0 border-3 border-green-500 rounded-full"></div>
-                  </div>
-                </div>
-                <div className="product-content mt-[26px]">
-                  <h4 className="product-title text-base font-semibold truncate">
-                    {dataItem.name}
-                  </h4>
-                  <span className="product-time text-sm text-gray-600">
-                    {dataItem.time}
-                  </span>
-                </div>
-                </Link>
-              );
-            })}
+            <PopularsList data={data}/>
           </div>
         </div>
       </div>
