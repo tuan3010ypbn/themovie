@@ -2,11 +2,8 @@ import {Link} from "react-router-dom";
 
 
 export function CardMovie({dataItem}) {
-  return (<Link
-      key={dataItem.id}
-      to={"/detail"}
-      className="min-w-[150px] group relative hover:shadow-lg transition-transform transform hover:translate-y-[-4px]"
-    >
+  return (
+    <>
       <div className="product-item--img relative">
         <img
           src={`https://image.tmdb.org/t/p/w500${dataItem.poster_path}`}
@@ -29,5 +26,6 @@ export function CardMovie({dataItem}) {
           {dataItem.release_date ? dataItem.release_date : dataItem.first_air_date}
         </span>
       </div>
-    </Link>);
+    </>
+  );
 }
