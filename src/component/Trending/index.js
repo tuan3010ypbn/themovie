@@ -35,7 +35,7 @@ function Trending() {
           return (
             <Link
               key={item.id}
-              to={"/detail"}
+              to={`/detail/${item.id}`}
               className="min-w-[150px] group relative hover:shadow-lg transition-transform transform hover:translate-y-[-4px]"
             >
               <CardMovie dataItem={item}/>

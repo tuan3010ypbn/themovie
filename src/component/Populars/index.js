@@ -23,7 +23,7 @@ function Populars() {
   const PopularsList = ({data}) => {
     if (!data) {
       return (
-        <div className="h-[299px] w-[100%] flex justify-center items-center">
+        <div className="w-[100%] m-auto flex justify-center items-center">
           <Loading/>
         </div>
       )
@@ -35,7 +35,7 @@ function Populars() {
           return (
             <Link
               key={item.id}
-              to={"/detail"}
+              to={`/detail/${item.id}`}
               className="min-w-[150px] group relative hover:shadow-lg transition-transform transform hover:translate-y-[-4px]"
             >
               <CardMovie dataItem={item}/>

@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 
 
 export function CardMovie({dataItem}) {
+
   return (
     <>
       <div className="product-item--img relative">

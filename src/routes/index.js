@@ -50,8 +50,16 @@ function RoutesApp() {
                 element={<PrivateRoute><Home/></PrivateRoute>}
               />
               <Route
-                path="/detail"
+                path="/detail/:id"
                 element={<PrivateRoute><Detail/></PrivateRoute>}
+              />
+              <Route
+                path="/tvshow"
+                element={<PrivateRoute><TvShow/></PrivateRoute>}
+              />
+              <Route
+                path="/people"
+                element={<PrivateRoute><People/></PrivateRoute>}
               />
               <Route
                 path="/movies"

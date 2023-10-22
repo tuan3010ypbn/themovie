@@ -246,3 +246,7 @@ export const checkLoginUsers = async (username, password) => {
   console.log(result);
   return result;
 }
+
+export const filmsAPI = `https://652405ebea560a22a4e945b0.mockapi.io/user/films`
+
+
